@@ -105,3 +105,20 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     },
   });
 };
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  createTypes(`
+    type MarkdownRemarkFrontmatter implements Node {
+      title: String!
+      cover: File @fileByRelativePath
+      tech: [String]
+      github: String
+      external: String
+      cta: String
+    }
+  `);
+};
+
+const events = require('events');
+events.EventEmitter.defaultMaxListeners = 20;
